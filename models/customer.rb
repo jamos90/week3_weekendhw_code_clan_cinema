@@ -1,4 +1,5 @@
 require_relative("../db/sql_runner.rb")
+require_relative("./ticket.rb")
 
 class Customer
 
@@ -46,6 +47,18 @@ class Customer
     # results = tickets.map {|ticket| Customer.new(ticket)}
     # return results.length()
     return tickets
+  end
+
+  # def remove_funds(cost)
+  #    @funds -= cost
+  # end
+
+  def buy_ticket(film)
+    @funds -= film.price
+    update()
+    ticket = Ticket.new({'film_id' => film.id, 'customer_id' => @id})
+    ticket.save()
+    return ticket
   end
 
   def self.all()
