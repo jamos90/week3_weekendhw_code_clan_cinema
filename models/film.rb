@@ -38,11 +38,12 @@ class Film
   end
 
   def how_many_customers
-    sql = "SELECT films.* FROM films INNER JOIN tickets ON tickets.film_id = films.id WHERE customer_id = $1"
+    sql = "SELECT films.* FROM films INNER JOIN tickets ON tickets.film_id = films.id WHERE film_id = $1"
     values = [@id]
-    results = SqlRunner.run(sql,values)
-    customers = results.map{|customer| Customer.new(customer)}
-    return customers.length()
+    results = SqlRunner.run(sql,values).count()
+    # customers = results.map{|customer| Customer.new(customer)}
+    # return customers.length()
+    return results
   end
 
   def self.all()

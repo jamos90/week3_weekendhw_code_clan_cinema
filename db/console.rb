@@ -57,6 +57,15 @@ Ticket.delete()
 
     ticket3.save()
 
+    ticket4 = Ticket.new({
+      'customer_id' => customer2.id,
+      'film_id' => film1.id
+      })
+
+      ticket4.save()
+
+
+
 
 
   binding.pry

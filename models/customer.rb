@@ -42,9 +42,10 @@ class Customer
   def how_many_tickets()
     sql = "SELECT * FROM customers INNER JOIN tickets ON tickets.customer_id = customers.id WHERE customer_id = $1"
     values = [@id]
-    tickets = SqlRunner.run(sql, values)
-    results = tickets.map {|ticket| Customer.new(ticket)}
-    return results.length()
+    tickets = SqlRunner.run(sql, values).count()
+    # results = tickets.map {|ticket| Customer.new(ticket)}
+    # return results.length()
+    return tickets
   end
 
   def self.all()
