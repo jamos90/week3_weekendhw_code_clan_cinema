@@ -31,6 +31,14 @@ class Customer
     updated_customers = SqlRunner.run(sql, values)
   end
 
+  def films()
+    sql = "SELECT films.* FROM films
+    INNER JOIN tickets ON tickets.film_id =tickets.id WHEREE customer_id = $1"
+    values = [@id]
+    films = SqlRunner.run(sql, values)
+    return films.map{|film| Film.new(film)}
+  end
+
   def self.all()
     sql = "SELECT * FROM customers"
     values =[]
